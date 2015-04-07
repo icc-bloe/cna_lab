@@ -6,6 +6,6 @@ cd /tmp/cna_lab/docker_images/apache
 cd /tmp/cna_lab/docker_images/haproxy
 ./build-image.sh
 
-cd /tmp/docker_images/web_app
+cd /tmp/cna_lab/docker_images/web_app
 ./build-image.sh
 
