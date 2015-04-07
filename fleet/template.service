@@ -1,3 +1,9 @@
+# in a fleet unit file you can use the following variables
+# %i -> Instance name (if you create a service based on a template)
+# %n -> Full unit name
+# %N -> Unescaped full unit name
+# %p -> Unescaped prefix name
+
 [Unit]
 Description=<Description of the Service>
 
@@ -32,3 +38,9 @@ ExecStart=
 
 # Define that this service can only be scheduled on a machine that contains the specified metadata
 # MachineMetadata=public=true
+
+# Schedule this service where service X is running
+# MachineOf=X.service
+
+# Schedule this service on all hosts
+# Global=true
