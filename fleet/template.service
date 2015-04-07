@@ -1,0 +1,34 @@
+[Unit]
+Description=<Description of the Service>
+
+# Define the order when the service should start
+After=docker.service
+# Before=XYZ.service
+
+# Does the service require another service to be started?
+# Requires=XYZ.service
+
+[Service]
+# Should the container be restarted? If yes, when?
+# values are always,on-success,on-failure,on-abnormal,on-abort,on-watchdog
+# Restart=
+
+# What should be done before the actual process is started
+# here you should normally kill any existing instances of docker containers
+# ExecStartPre=-/usr/bin/docker kill <container_name>
+# Note: the hyphen after the equal sign is used to ignore any errors executing this command
+
+# Here is defined what process should be started when starting the service
+ExecStart=
+
+# You can also define an action that is executed when the service is stopped
+# Usually you should also stop the container
+# ExecStop=/usr/bin/docker stop <container_name>
+
+# These are special definitions only available for fleet (not for systemd)
+[X-Fleet]
+# Define what other services cannot be on the same host as this service
+# Conflicts=haproxy@*.service
+
+# Define that this service can only be scheduled on a machine that contains the specified metadata
+# MachineMetadata=public=true
