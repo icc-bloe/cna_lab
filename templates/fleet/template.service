@@ -14,7 +14,14 @@ After=docker.service
 # Does the service require another service to be started?
 # Requires=XYZ.service
 
+# This service is bound to another service. If the other service is stopped this one stops, too.
+# if this service is started, the bound service is started, too
+# BindsTo=
+
 [Service]
+# Read environment variables from file
+# EnvironmentFile=/path/to/file
+
 # Should the container be restarted? If yes, when?
 # values are always,on-success,on-failure,on-abnormal,on-abort,on-watchdog
 # Restart=
