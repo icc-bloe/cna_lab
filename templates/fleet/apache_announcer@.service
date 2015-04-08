@@ -1,0 +1,24 @@
+[Unit]
+Description=Announce apache service in etcd
+BindsTo=<TODO>
+After=docker.service
+After=<TODO>
+
+[Service]
+<TODO: read environment variables from file>
+Restart=always
+ExecStartPre=-/bin/sh -c "etcdctl mkdir /services/webserver"
+ExecStart=/bin/sh -c "ID=`uuidgen`; echo $ID > /tmp/apache@%i.uuid; TTL=10; SLEEP_TIME=7; \
+  etcdctl setdir /services/webserver/$ID --ttl $TTL;  \
+  while true; \
+    do \
+      etcdctl updatedir /services/webserver/$ID --ttl $TTL; \
+      etcdctl set /services/webserver/$ID/host <TODO> --ttl $TTL; \
+      etcdctl set /services/webserver/$ID/port <TODO> --ttl $TTL; \
+      etcdctl set /services/webserver/$ID/ip <TODO> --ttl $TTL; \
+      sleep $SLEEP_TIME; \
+    done"
+ExecStop=/bin/sh -c "etcdctl rm /services/webserver/`cat /tmp/apache@%i.uuid` --recursive && rm -f /tmp/apache@%i.uuid"
+
+[X-Fleet]
+MachineOf=<TODO>
