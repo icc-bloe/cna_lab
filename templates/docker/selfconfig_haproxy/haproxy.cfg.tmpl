@@ -1,10 +1,6 @@
+
 global
   log 127.0.0.1 local0
-  # log 127.0.0.1 local1 notice
-  #chroot /var/lib/haproxy
-  #user haproxy
-  #group haproxy
-  # daemon
 
 defaults
   log global
@@ -30,9 +26,5 @@ backend webserver_nodes
   mode http
   balance roundrobin
   option forwardfor
-  http-request set-header X-Forwarded-Port %[dst_port]
-  http-request add-header X-Forwarded-Proto https if { ssl_fc }
-  option httpchk HEAD / HTTP/1.1\r\nHost:localhosts 
-  server webserver_0 172.17.8.11:8080 check
-  server webserver_1 172.17.8.12:8080 check
-  server webserver_2 172.17.8.13:8080 check
+  option httpchk HEAD / HTTP/1.1\r\nHost:localhosts {{ range $dir := lsdir "/services/webserver/" }} {{$ippath := printf "/services/webserver/%s/ip" $dir}} {{$portpath := printf "/services/webserver/%s/port" $dir}}
+  {{ end }}

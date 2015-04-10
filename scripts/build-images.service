@@ -1,0 +1,12 @@
+[Unit]
+Description=Downloads the dockerfiles and builds the containers for the cna lab
+After=docker.service
+Requires=docker.service
+
+[Service]
+EnvironmentFile=/etc/environment
+ExecStartPre=/bin/bash -c "if [ ! -d /tmp/cna_lab ]; then cd /tmp; git clone https://github.com/icc-bloe/cna_lab.git; fi;"
+ExecStart=/bin/bash -c "exec /tmp/cna_lab/scripts/build-images.sh"
+
+[X-Fleet]
+Global=true
