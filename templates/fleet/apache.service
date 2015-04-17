@@ -1,0 +1,15 @@
+[Unit]
+Description=Apache container
+# TODO: start this service after docker has started
+# 	docker is also started as service: docker.service
+
+[Service]
+ExecStartPre=-/usr/bin/docker kill cnalab_apache
+ExecStartPre=-/usr/bin/docker rm -f cnalab_apache
+
+# TODO: the hostname of the container should be apache_<instance_name>
+ExecStart=/usr/bin/docker run -p 8080:80 -h apache --name cnalab_apache cnalab/apache
+ExecStop=/usr/bin/docker stop cnalab_apache
+
+
+# TODO: schedule service only on machine where no other apache is running 
