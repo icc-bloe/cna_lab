@@ -27,4 +27,4 @@ backend webserver_nodes
   balance roundrobin
   option forwardfor
   option httpchk HEAD / HTTP/1.1\r\nHost:localhosts {{ range $dir := lsdir "/services/webserver/" }} {{$ippath := printf "/services/webserver/%s/ip" $dir}} {{$portpath := printf "/services/webserver/%s/port" $dir}}
-  {{ end }}
+  server webserver_{{ getv $ippath }}:{{ getv $portpath }} {{ <TODO: get ip> }}:{{ <TODO: get port> }} check {{ end }}
