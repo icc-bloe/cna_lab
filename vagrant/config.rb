@@ -54,13 +54,15 @@ $update_channel='stable'
 #$share_home=false
 
 # Customize VMs
-#$vm_gui = false
-#$vm_memory = 1024
-#$vm_cpus = 1
+$vm_gui = false
+$vm_memory = 256
+$vm_cpus = 1
 
 # Share additional folders to the CoreOS VMs
 # For example,
-# $shared_folders = {'/path/on/host' => '/path/on/guest', '/home/foo/app' => '/app'}
+#$shared_folders = {
+#	'c:/mapped' => '/home/core/mapped'
+#}
 # or, to map host folders to guest folders of the same name,
 # $shared_folders = Hash[*['/home/foo/app1', '/home/foo/app2'].map{|d| [d, d]}.flatten]
 #$shared_folders = {}
