@@ -1,9 +1,9 @@
 [Unit]
 Description=Apache container
-# TODO: start this service after docker has started
-# 	docker is also started as service: docker.service
 
 [Service]
+# TODO: restart apache container if it crashes
+
 ExecStartPre=-/usr/bin/docker kill cnalab_apache
 ExecStartPre=-/usr/bin/docker rm -f cnalab_apache
 
