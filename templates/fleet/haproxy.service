@@ -1,0 +1,16 @@
+[Unit]
+# <TODO: Describe What service this is>
+# Description=
+After=docker.service
+Requires=docker.service
+
+[Service]
+Restart=always
+# <TODO: Kill already existing container>
+# ExecStartPre=-/usr/bin/docker kill <container_name>
+
+# This starts the haproxy container called cnalab_haproxy
+ExecStart=/usr/bin/docker run -p 80:80 -p 1936:1936 --name cnalab_haproxy cnalab/haproxy
+
+# <TODO: Stop haproxy container>
+# ExecStop=/usr/bin/docker stop <container_name>
