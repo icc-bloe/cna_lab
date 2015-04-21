@@ -6,8 +6,9 @@ Requires=docker.service
 
 [Service]
 Restart=always
-# <TODO: Kill already existing container>
+# <TODO: Kill and remove already existing container>
 # ExecStartPre=-/usr/bin/docker kill <container_name>
+# ExecStartPre=-/usr/bin/docker rm -f <container_name>
 
 # This starts the haproxy container called cnalab_haproxy
 ExecStart=/usr/bin/docker run -p 80:80 -p 1936:1936 --name cnalab_haproxy cnalab/haproxy
